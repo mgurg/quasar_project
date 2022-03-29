@@ -125,10 +125,10 @@
   resolved "https://registry.yarnpkg.com/@positron/stack-trace/-/stack-trace-1.0.0.tgz#14fcc712a530038ef9be1ce6952315a839f466a8"
   integrity sha1-FPzHEqUwA475vhzmlSMVqDn0Zqg=
 
-"@quasar/app-vite@^1.0.0-alpha.0":
-  version "1.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/@quasar/app-vite/-/app-vite-1.0.0-beta.9.tgz#3a96757171dc54b5dee1fba1e648ef8037e5905e"
-  integrity sha512-OJcm9EZtqzFlaD9PVfEw2eJcFZQNFs8MdnlfpYohY1kwu/UERPry2X3zHToi7BObDfexm3Bb9a24L0u88sKq4A==
+"@quasar/app-vite@^1.0.0-beta.10":
+  version "1.0.0-beta.10"
+  resolved "https://registry.yarnpkg.com/@quasar/app-vite/-/app-vite-1.0.0-beta.10.tgz#61be6518a6aa32f24b5a2bf077334a4078655510"
+  integrity sha512-1m8/ybIk9PATjqfXxAlF57WJQySAB/jf8DEKKdClIJPcij4KTO+zIEoq20nGnE7VMPtB9a5bUEVlGcGie/MNVg==
   dependencies:
     "@quasar/fastclick" "1.1.5"
     "@quasar/vite-plugin" "^1.0.6"

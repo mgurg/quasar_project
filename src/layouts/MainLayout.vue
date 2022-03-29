@@ -12,10 +12,30 @@
         />
 
         <q-toolbar-title>
-          Quasar App
+          Quasar App {{ $t("hello") }}
         </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
+        <q-btn flat round dense icon="notifications" class="q-mr-xs" @click="notify"></q-btn>
+        <q-btn flat round dense icon="language" class="q-mr-xs">
+          <q-menu>
+            <q-list style="min-width: 100px">
+              <q-item clickable v-close-popup>
+                <q-item-section @click="setLocale('fr')">French (Francais)</q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup>
+                <q-item-section @click="setLocale('de')">German (Deutsch)</q-item-section>
+              </q-item>
+              <q-item clickable v-close-popup>
+                <q-item-section @click="setLocale('en-US')">English (English)</q-item-section>
+              </q-item>
+              <q-separator />
+              <q-item clickable v-close-popup>
+                <q-item-section>Help &amp; Feedback</q-item-section>
+              </q-item>
+            </q-list>
+          </q-menu>
+        </q-btn>
       </q-toolbar>
     </q-header>
 
@@ -94,6 +114,10 @@ const linksList = [
   }
 ]
 
+import { useQuasar } from "quasar";
+import { watch } from "vue";
+import { useI18n } from "vue-i18n";
+
 export default defineComponent({
   name: 'MainLayout',
 
@@ -102,14 +126,41 @@ export default defineComponent({
   },
 
   setup () {
+    const $q = useQuasar();
+
+    const { locale } = useI18n({ useScope: 'global' });
+    const lang = ref(locale); // $q.lang.isoName
+
+    watch(lang, (val) => {
+      // dynamic import, so loading on demand only
+      import(
+        /* webpackInclude: /(fr|de|en-US)\.js$/ */
+        "quasar/lang/" + val
+      ).then((lang) => {
+        $q.lang.set(lang.default);
+      });
+    });
+
+    function setLocale(lang) {
+      locale.value = lang;
+    }
     const leftDrawerOpen = ref(false)
 
+    function notify() {
+      $q.notify({
+        message: 'Danger, Will Robinson! Danger!',
+        position: 'top-right',
+        progress: true,
+      })
+    }
     return {
       essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
-      }
+      },
+      notify,
+      setLocale,
     }
   }
 })
